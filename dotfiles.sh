@@ -24,72 +24,29 @@ $(printf '        %s\n' "${dotfiles[@]%%:*}")
 EOF
 }
 
-dotfiles_install_all()
+dotfiles_doit()
 {
-	echo "[$FUNCNAME] Installing all..."
-	for a_dotfiles in "${dotfiles[@]}";
-	do
-		source_directory="${a_dotfiles%%:*}"
-		target_directory="${a_dotfiles##*:}"
-		echo "[$FUNCNAME] Stowing $source_directory..."
-		stow -v -R -t $target_directory $source_directory
-	done
-}
-
-dotfiles_install()
-{
+	option=$1
+	shift
+	case $option in
+		-D)
+			action="Unstowing"
+			;;
+		-R)
+			action="Stowing"
+			;;
+	esac
 	if [ $# -eq 0 ];
 	then
-		dotfiles_install_all
-	else
-		# Parcourir chaque élément du paramètre en entrée
-		# Recherche du répertoire cible dans la variable 'dotfiles'
-		# Création des liens symboliques sur la cible avec 'stow'
-		for a_dotfiles in $@
+		echo "[$FUNCNAME] $action all..."
+		for a_dotfiles in "${dotfiles[@]}";
 		do
-			for template_dotfiles in "${dotfiles[@]}";
-			do
-				source_directory="${template_dotfiles%%:*}"
-				target_directory="${template_dotfiles##*:}"
-				if [ "$source_directory" == "$a_dotfiles" ];
-				then
-					break
-				else
-					target_directory=
-				fi
-			done
-			if [ -z "$target_directory" ];
-			then
-				echo "[$FUNCNAME] Error: could not found target directory for '$a_dotfiles'"
-			else
-				echo "[$FUNCNAME] Stowing $source_directory..."
-				stow -v -R -t $target_directory $source_directory
-			fi
+			source_directory="${a_dotfiles%%:*}"
+			target_directory="${a_dotfiles##*:}"
+			echo "[$FUNCNAME]   $action $source_directory..."
+			stow -v -R -t $target_directory $source_directory
 		done
-	fi
-}
-
-dotfiles_remove_all()
-{
-	echo "[$FUNCNAME] Removing all..."
-	for a_dotfiles in "${dotfiles[@]}";
-	do
-		source_directory="${a_dotfiles%%:*}"
-		target_directory="${a_dotfiles##*:}"
-		echo "[$FUNCNAME] Unstowing $source_directory..."
-		stow -v -D -t $target_directory $source_directory
-	done
-}
-
-dotfiles_remove()
-{
-	if [ $# -eq 0 ];
-	then
-		dotfiles_remove_all
 	else
-		# Parcourir chaque élément du paramètre en entrée
-		# Recherche du répertoire cible dans la variable 'dotfiles'
-		# Suppression des liens symboliques sur la cible avec 'stow'
 		for a_dotfiles in $@
 		do
 			for template_dotfiles in "${dotfiles[@]}";
@@ -107,8 +64,8 @@ dotfiles_remove()
 			then
 				echo "[$FUNCNAME] Error: could not found target directory for '$a_dotfiles'"
 			else
-				echo "[$FUNCNAME] Unstowing $source_directory..."
-				stow -v -D -t $target_directory $source_directory
+				echo "[$FUNCNAME] $action $source_directory..."
+				stow -v $option -t $target_directory $source_directory
 			fi
 		done
 	fi
@@ -125,12 +82,12 @@ do
 
 		install)
 			shift
-			dotfiles_install $@
+			dotfiles_doit -R $@
 			break
 			;;
 		remove)
 			shift
-			dotfiles_remove $@
+			dotfiles_doit -D $@
 			break
 			;;
 		*)
@@ -142,6 +99,6 @@ do
 done
 
 unset -v dotfiles
-unset -f dotfiles_usage dotfiles_install dotfiles_remove
+unset -f dotfiles_usage dotfiles_doit
 
 exit $an_error_occurs
