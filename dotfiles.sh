@@ -69,9 +69,49 @@ dotfiles_install()
 	fi
 }
 
+dotfiles_remove_all()
+{
+	echo "[$FUNCNAME] Removing all..."
+	for a_dotfiles in "${dotfiles[@]}";
+	do
+		source_directory="${a_dotfiles%%:*}"
+		target_directory="${a_dotfiles##*:}"
+		echo "[$FUNCNAME] Unstowing $source_directory..."
+		stow -v -D -t $target_directory $source_directory
+	done
+}
+
 dotfiles_remove()
 {
-	echo "[$FUNCNAME] Not implemented"
+	if [ $# -eq 0 ];
+	then
+		dotfiles_remove_all
+	else
+		# Parcourir chaque élément du paramètre en entrée
+		# Recherche du répertoire cible dans la variable 'dotfiles'
+		# Suppression des liens symboliques sur la cible avec 'stow'
+		for a_dotfiles in $@
+		do
+			for template_dotfiles in "${dotfiles[@]}";
+			do
+				source_directory="${template_dotfiles%%:*}"
+				target_directory="${template_dotfiles##*:}"
+				if [ "$source_directory" == "$a_dotfiles" ];
+				then
+					break
+				else
+					target_directory=
+				fi
+			done
+			if [ -z "$target_directory" ];
+			then
+				echo "[$FUNCNAME] Error: could not found target directory for '$a_dotfiles'"
+			else
+				echo "[$FUNCNAME] Unstowing $source_directory..."
+				stow -v -D -t $target_directory $source_directory
+			fi
+		done
+	fi
 }
 
 # Programme principal
