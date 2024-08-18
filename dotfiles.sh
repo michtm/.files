@@ -20,7 +20,7 @@ Liste des commandes disponibles:
         remove     Supprime des fichiers points
 
 Liste des fichiers points disponibles:
-$(printf '        %s\n' "${dotfiles[@]}")
+$(printf '        %s\n' "${dotfiles[@]%%:*}")
 EOF
 }
 
