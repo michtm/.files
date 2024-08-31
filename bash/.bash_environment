@@ -1,0 +1,13 @@
+# ~/.bash_environment - Environnement Bash
+export HISTCONTROL=ignoredups
+export HISTFILE=~/.bash_history
+export HISTFILESIZE=4096
+export HISTTIMEFORMAT="%F %T " 
+export HISTSIZE=4096
+
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+shopt -s checkwinsize
+shopt -s histappend

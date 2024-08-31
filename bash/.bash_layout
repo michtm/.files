@@ -1,0 +1,26 @@
+# ~/.bash_layout - Définition de PS1 et peut-être d'autres choses
+
+## Format: [TIME USER@HOST PWD] $
+prompt_command()
+{
+	history -a
+	PS1="\[${COLOR_FG}\][\[${COLOR_FG_BLACK}\]\D{%F %H:%M}\] \[${COLOR_FG}\]\u\[${COLOR_FG_BLACK}\]@\[${COLOR_FG}\]\h \[${COLOR_FG_GREEN}\]\w\[${COLOR_FG}\]] \$ \[${COLOR_NC}\]"
+}
+export PROMPT_COMMAND=prompt_command
+export PS1="\[${COLOR_FG}\][\[${COLOR_FG_BLACK}\]\D{%F %H:%M}\] \[${COLOR_FG}\]\u\[${COLOR_FG_BLACK}\]@\[${COLOR_FG}\]\h \[${COLOR_FG_GREEN}\]\w\[${COLOR_FG}\]] \$ \[${COLOR_NC}\]"
+
+OS=$(awk -F= '/^PRETTY_NAME/{gsub("\"",""); print $2}' /etc/os-release)
+KERNEL=$(uname -nrs)
+MEMORY=$(free -b | awk '/Mem/{print $3"/"$2}')
+CPU=$(cat /proc/cpuinfo | grep -i "^model name" | awk -F": " '{print $2}' | head -1 | sed 's/ \+/ /g')
+GPU=$(lspci | grep -i "Display\|3d\|VGA" | awk -F": " '{print $2}' | head -1 | sed 's/ \+/ /g')
+
+printf "${COLOR_FG}LOADING - BOOTING BASH...${COLOR_NC}\n"
+printf "    ${COLOR_FG}Operating System${COLOR_FG}: %s${COLOR_NC}\n" "$OS"
+printf "    ${COLOR_FG}Kernel${COLOR_FG}: %s${COLOR_NC}\n" "$KERNEL"
+printf "    ${COLOR_FG}Shell${COLOR_FG}: %s${COLOR_NC}\n" "$SHELL"
+printf "    ${COLOR_FG}Memory (Used/Total in Bytes)${COLOR_FG}: %s${COLOR_NC}\n" "$MEMORY"
+printf "    ${COLOR_FG}Central Process Unit${COLOR_FG}: %s${COLOR_NC}\n" "$CPU"
+printf "    ${COLOR_FG}Graphics Processing Unit${COLOR_FG}: %s${COLOR_NC}\n" "$GPU"
+
+unset -v OS KERNEL MEMORY CPU GPU
