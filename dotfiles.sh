@@ -43,8 +43,20 @@ dotfiles_doit()
 		do
 			source_directory="${a_dotfiles%%:*}"
 			target_directory="${a_dotfiles##*:}"
-			echo "[$FUNCNAME]   $action $source_directory..."
-			stow -v -R -t $target_directory $source_directory
+			backup="backup/$source_directory/$(date +%F)"
+			mkdir -p $backup
+			for file in $(ls -A $source_directory);
+			do
+				if [ -L "$target_directory/$file" ];
+				then
+					target=$(realpath "$target_directory/$file")
+					cp $target $backup
+				else
+					mv "$target_directory/$file" $backup
+				fi
+			done
+			echo "[$FUNCNAME]   - $action $source_directory..."
+			stow -v $option -t $target_directory $source_directory
 		done
 	else
 		for a_dotfiles in $@
@@ -64,6 +76,18 @@ dotfiles_doit()
 			then
 				echo "[$FUNCNAME] Error: could not found target directory for '$a_dotfiles'"
 			else
+				backup="backup/$source_directory/$(date +%F)"
+				mkdir -p $backup
+				for file in $(ls -A $source_directory);
+				do
+					if [ -L "$target_directory/$file" ];
+					then
+						target=$(realpath "$target_directory/$file")
+						cp $target $backup
+					else
+						mv "$target_directory/$file" $backup
+					fi
+				done
 				echo "[$FUNCNAME] $action $source_directory..."
 				stow -v $option -t $target_directory $source_directory
 			fi
