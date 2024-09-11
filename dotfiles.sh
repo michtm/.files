@@ -5,6 +5,7 @@
 dotfiles=(
 	"bash:$HOME"
 	"git:$HOME"
+	"nvim:$HOME/.config/nvim"
 )
 an_error_occurs=0
 
@@ -52,10 +53,14 @@ dotfiles_doit()
 					target=$(realpath "$target_directory/$file")
 					cp $target $backup
 				else
-					mv "$target_directory/$file" $backup
+					mv "$target_directory/$file" $backup 2>/dev/null
 				fi
 			done
 			echo "[$FUNCNAME]   - $action $source_directory..."
+			if [ "$target_directory" != "$HOME" ];
+			then
+				mkdir -p $target_directory
+			fi
 			stow -v $option -t $target_directory $source_directory
 		done
 	else
@@ -85,10 +90,14 @@ dotfiles_doit()
 						target=$(realpath "$target_directory/$file")
 						cp $target $backup
 					else
-						mv "$target_directory/$file" $backup
+						mv "$target_directory/$file" $backup 2>/dev/null
 					fi
 				done
 				echo "[$FUNCNAME] $action $source_directory..."
+				if [ "$target_directory" != "$HOME" ];
+				then
+					mkdir -p $target_directory
+				fi
 				stow -v $option -t $target_directory $source_directory
 			fi
 		done
