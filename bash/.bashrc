@@ -13,9 +13,9 @@
 ## 5. Présentation
 ssource()
 {
-	if [ -f $1 ]; then
-		source $1
-	fi
+  if [ -f $1 ]; then
+    source $1
+  fi
 }
 
 ssource ~/.bash_environment

@@ -6,7 +6,7 @@ export HISTTIMEFORMAT="%F %T "
 export HISTSIZE=4096
 
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
 shopt -s checkwinsize

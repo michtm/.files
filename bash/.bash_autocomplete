@@ -2,10 +2,10 @@
 
 ## Check for recent enough version of bash.
 if [ "${BASH_VERSINFO[0]}" -gt 4 ] || [ "${BASH_VERSINFO[0]}" -eq 4 -a "${BASH_VERSINFO[1]}" -ge 2 ]; then
-	[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion" ] &&
-		source "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
-	if shopt -q progcomp && [ -r /usr/share/bash-completion/bash_completion ]; then
-		# Source completion code.
-		source /usr/share/bash-completion/bash_completion
-	fi
+  [ -r "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion" ] &&
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
+  if shopt -q progcomp && [ -r /usr/share/bash-completion/bash_completion ]; then
+    # Source completion code.
+    source /usr/share/bash-completion/bash_completion
+  fi
 fi

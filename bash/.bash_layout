@@ -3,8 +3,8 @@
 ## Format: [TIME USER@HOST PWD] $
 prompt_command()
 {
-	history -a
-	PS1="\[${COLOR_FG}\][\[${COLOR_FG_BLACK}\]\D{%F %H:%M}\] \[${COLOR_FG}\]\u\[${COLOR_FG_BLACK}\]@\[${COLOR_FG}\]\h \[${COLOR_FG_GREEN}\]\w\[${COLOR_FG}\]] \$ \[${COLOR_NC}\]"
+  history -a
+  PS1="\[${COLOR_FG}\][\[${COLOR_FG_BLACK}\]\D{%F %H:%M}\] \[${COLOR_FG}\]\u\[${COLOR_FG_BLACK}\]@\[${COLOR_FG}\]\h \[${COLOR_FG_GREEN}\]\w\[${COLOR_FG}\]] \$ \[${COLOR_NC}\]"
 }
 export PROMPT_COMMAND=prompt_command
 export PS1="\[${COLOR_FG}\][\[${COLOR_FG_BLACK}\]\D{%F %H:%M}\] \[${COLOR_FG}\]\u\[${COLOR_FG_BLACK}\]@\[${COLOR_FG}\]\h \[${COLOR_FG_GREEN}\]\w\[${COLOR_FG}\]] \$ \[${COLOR_NC}\]"
