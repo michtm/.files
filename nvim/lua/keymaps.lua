@@ -1,0 +1,1 @@
+-- ~/.config/nvim/lua/keymaps.lua - Raccourcis clavier pour Neovim

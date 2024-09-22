@@ -6,6 +6,11 @@ Un ensemble de fichiers points
 - [Git](https://git-scm.com/)
 - [GNU Stow](https://www.gnu.org/software/stow/)
 
+# Fichiers points gérés
+- Bash
+- Git
+- Neovim
+
 ## Installation (en théorie)
 ```bash
 git clone https://github.com/michtm/.files.git .files
