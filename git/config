@@ -1,0 +1,4 @@
+# $XDG_CONFIG_HOME/git/config - Fichier de configuration Git
+[user]
+	name = "Michel TRING"
+	email = "michel.tring@gmail.com"
