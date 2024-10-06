@@ -14,12 +14,10 @@
 (load custom-file t)
 
 ;; Quelques configurations personnelles
-(setq make-backup-files nil)
-(set-face-attribute 'default nil :font cb--default-font)
+(cb-init/setup)
 
 ;; Gestion des paquets via pkg/use-package
 (require 'packages)
 (pkg/use-package magit)
 
-;; TODO: charger un thème
 ;;; init.el ends here
