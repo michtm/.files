@@ -121,13 +121,13 @@ background color that is barely perceptible."
 
 (custom-theme-set-faces
  'monos
- ;; Default Face ---------------------------------------------------------------
+ ;; Default Face
  `(default ((t (:family
                 ,monos-font--family
                 :height ,(* monos-font--size 10)
                 :foreground ,monos-color--foreground
                 :background ,monos-color--background))))
- ;; Monos Faces ----------------------------------------------------------------
+ ;; Monos Faces
  `(monos-face-default ((t (:inherit default))))
  `(monos-face-critical ((t (:foreground
                             ,monos-color--background
@@ -148,17 +148,10 @@ background color that is barely perceptible."
  ;; M-x customize-group RET basic-faces
  `(bold ((t (:inherit monos-face-strong))))
  `(bold-italic ((t (:inherit (monos-face-strong monos-face-faded)))))
- `(border ((t nil)))
- `(child-frame-border ((t nil)))
- `(cursor ((t (:inverse-video
-               t
-               :inherit monos-face-default))))
  `(error ((t (:inherit monos-face-critical))))
  `(escape-glyph ((t (:inherit (monos-face-popout monos-face-strong)))))
- `(fill-column-indicator ((t (:inherit monos-face-faded))))
  `(fixed-pitch ((t (:inherit monos-face-default))))
  `(fixed-pitch-serif ((t (:inherit monos-face-default))))
- `(fringe ((t (:inherit monos-face-faded))))
  `(glyphless-char ((t :height 0.6)))
  `(header-line ((t (:weight
                     ,'light
@@ -168,44 +161,16 @@ background color that is barely perceptible."
                               (monos-face-default monos-face-popout)))))
  `(highlight ((t (:inherit monos-face-subtle))))
  `(homoglyph ((t (:inherit (monos-face-popout monos-face-strong)))))
- `(internal-border ((t nil)))
- `(isearch ((t (:inherit monos-face-strong))))
  `(italic ((t (:inherit monos-face-faded))))
- `(lazy-highlight ((t (:inherit monos-face-subtle))))
- `(line-number ((t (:inherit monos-face-faded))))
- `(line-number-current-line ((t (:inherit monos-face-strong))))
- `(line-number-major-tick ((t (:inherit monos-face-default))))
- `(line-number-minor-tick ((t (:inherit monos-face-faded))))
  `(link ((t (:inherit monos-face-salient))))
  `(link-visited ((t (:inherit monos-face-salient))))
- `(match ((t (:inherit monos-face-popout))))
- `(menu ((t nil)))
  `(minibuffer-prompt ((t (:inherit monos-face-strong))))
- `(mode-line ((t (:box
-                  (:line-width
-                   3
-                   :color ,monos-color--foreground
-                   :style nil)
-                  :inverse-video t
-                  :inherit monos-face-default))))
- `(mode-line-buffer-id ((t (:weight ,'regular))))
- `(mode-line-emphasis ((t (:weight ,'regular))))
- `(mode-line-highlight ((t (:inherit monos-face-popout))))
- `(mode-line-inactive ((t (:box
-                           (:line-width
-                            3
-                            :color ,monos-color--faded
-                            :style nil)
-                           :foreground ,monos-color--background
-                           :background ,monos-color--faded))))
- `(mouse ((t nil)))
  `(nobreak-hyphen ((t (:inherit monos-face-popout))))
  `(nobreak-space ((t (:inherit monos-face-popout))))
  `(read-multiple-choice-face ((t (:inherit monos-face-strong))))
  `(region ((t (:distant-foreground
                unspecified
                :inherit monos-face-subtle))))
- `(scroll-bar ((t nil)))
  `(secondary-selection ((t (:inherit monos-face-subtle))))
  `(shadow ((t (:inherit monos-face-faded))))
  `(success ((t (:inherit monos-face-salient))))
@@ -214,9 +179,6 @@ background color that is barely perceptible."
  `(tool-bar ((t (:foreground
                  ,monos-color--background
                  :background ,monos-color--faded))))
- `(tooltip ((t (:height
-                0.85
-                :inherit monos-face-subtle))))
  `(trailing-whitespace ((t (:inherit monos-face-subtle))))
  `(tty-menu-disabled-face ((t (:foreground
                                ,monos-color--background
@@ -234,6 +196,61 @@ background color that is barely perceptible."
                        :inherit monos-face-default))))
  `(vertical-border ((t (:foreground ,monos-color--subtle))))
  `(warning ((t (:inherit monos-face-popout))))
+ ;; M-x customize-group RET frames
+ `(border ((t nil)))
+ `(child-frame-border ((t nil)))
+ `(fringe ((t (:inherit monos-face-faded))))
+ `(internal-border ((t nil)))
+ `(scroll-bar ((t nil)))
+ ;; M-x customize-group RET cursor
+ `(cursor ((t (:inverse-video
+               t
+               :inherit monos-face-default))))
+ ;; M-x customize-group RET isearch
+ `(isearch ((t (:inherit monos-face-strong))))
+ `(isearch-fail ((t (:inherit monos-face-faded))))
+ `(isearch-group-1 ((t (:inherit monos-face-strong))))
+ `(isearch-group-2 ((t (:inherit monos-face-strong))))
+ ;; M-x customize-group RET lazy-highlight
+ `(lazy-highlight ((t (:inherit monos-face-subtle))))
+ ;; M-x customize-group RET menu
+ `(menu ((t nil)))
+ ;; M-x customize-group RET mouse
+ `(mouse ((t nil)))
+ `(mouse-drag-and-drop-region  ((t (:distant-foreground
+                                    unspecified
+                                    :inherit monos-face-subtle))))
+ ;; M-x customize-group RET display-line-numbers
+ `(line-number ((t (:inherit monos-face-faded))))
+ `(line-number-current-line ((t (:inherit monos-face-strong))))
+ `(line-number-major-tick ((t (:inherit monos-face-default))))
+ `(line-number-minor-tick ((t (:inherit monos-face-faded))))
+ ;; M-x customize-group RET display-fill-column-indicator
+ `(fill-column-indicator ((t (:inherit monos-face-faded))))
+ ;; M-x customize-group RET mode-line-faces
+ `(display-time-mail-face ((t nil)))
+ `(mode-line ((t (:box
+                  (:line-width
+                   3
+                   :color ,monos-color--foreground
+                   :style nil)
+                  :inverse-video t
+                  :inherit monos-face-default))))
+ `(mode-line-buffer-id ((t (:weight ,'regular))))
+ `(mode-line-emphasis ((t (:weight ,'regular))))
+ `(mode-line-highlight ((t (:inherit monos-face-popout))))
+ `(mode-line-inactive ((t (:box
+                           (:line-width
+                            3
+                            :color ,monos-color--faded
+                            :style nil)
+                           :foreground ,monos-color--background
+                           :background ,monos-color--faded))))
+ ;; M-x customize-group RET tooltip
+ `(tooltip ((t (:height
+                0.85
+                :inherit monos-face-subtle))))
+ ;; M-x customize-group RET window-divider
  `(window-divider ((t (:foreground ,monos-color--subtle))))
  `(window-divider-first-pixel ((t (:foreground ,monos-color--subtle))))
  `(window-divider-last-pixel ((t (:foreground ,monos-color--subtle))))
