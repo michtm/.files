@@ -23,7 +23,8 @@
         file-name-handler-alist cb--file-name-handler-alist
         vc-handled-backends cb--vc-handled-backends
         inhibit-startup-screen t
-        initial-scratch-message nil))
+        initial-scratch-message nil)
+  (if (fboundp 'global-company-mode) (global-company-mode)))
 
 (defun cb/before-init-hook ()
   (setq gc-cons-threshold cb--gc-cons-threshold-sup

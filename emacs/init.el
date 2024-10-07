@@ -18,6 +18,7 @@
 
 ;; Gestion des paquets via pkg/use-package
 (require 'packages)
+(pkg/use-package company)
 (pkg/use-package magit)
 
 ;;; init.el ends here
