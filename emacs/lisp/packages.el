@@ -6,8 +6,8 @@
 (defvar pkg--use-package-required nil)
 
 (defmacro pkg/use-package (name &rest args)
-  (unless `(package-installed-p ',name)
-    (unless (or pkg--package-contents-refreshed package-archive-contents)
+  (unless (not `(package-installed-p ',name))
+    (if (not (and pkg--package-contents-refreshed package-archive-contents))
       (setq package-archives
             '(("gnu" . "https://elpa.gnu.org/packages/")
               ("nongnu" . "https://elpa.nongnu.org/nongnu/")
