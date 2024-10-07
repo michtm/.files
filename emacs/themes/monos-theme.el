@@ -121,12 +121,14 @@ background color that is barely perceptible."
 
 (custom-theme-set-faces
  'monos
+
  ;; Default Face
  `(default ((t (:family
                 ,monos-font--family
                 :height ,(* monos-font--size 10)
                 :foreground ,monos-color--foreground
                 :background ,monos-color--background))))
+
  ;; Monos Faces
  `(monos-face-default ((t (:inherit default))))
  `(monos-face-critical ((t (:foreground
@@ -145,6 +147,7 @@ background color that is barely perceptible."
  `(monos-face-subtle ((t (:weight
                           ,'light
                           :background ,monos-color--subtle))))
+
  ;; M-x customize-group RET basic-faces
  `(bold ((t (:inherit monos-face-strong))))
  `(bold-italic ((t (:inherit (monos-face-strong monos-face-faded)))))
@@ -196,25 +199,31 @@ background color that is barely perceptible."
                        :inherit monos-face-default))))
  `(vertical-border ((t (:foreground ,monos-color--subtle))))
  `(warning ((t (:inherit monos-face-popout))))
+
  ;; M-x customize-group RET frames
  `(border ((t nil)))
  `(child-frame-border ((t nil)))
  `(fringe ((t (:inherit monos-face-faded))))
  `(internal-border ((t nil)))
  `(scroll-bar ((t nil)))
+
  ;; M-x customize-group RET cursor
  `(cursor ((t (:inverse-video
                t
                :inherit monos-face-default))))
+
  ;; M-x customize-group RET isearch
  `(isearch ((t (:inherit monos-face-strong))))
  `(isearch-fail ((t (:inherit monos-face-faded))))
  `(isearch-group-1 ((t (:inherit monos-face-strong))))
  `(isearch-group-2 ((t (:inherit monos-face-strong))))
+
  ;; M-x customize-group RET lazy-highlight
  `(lazy-highlight ((t (:inherit monos-face-subtle))))
+
  ;; M-x customize-group RET menu
  `(menu ((t nil)))
+
  ;; M-x customize-group RET mouse
  `(mouse ((t nil)))
  `(mouse-drag-and-drop-region  ((t (:distant-foreground
@@ -225,8 +234,10 @@ background color that is barely perceptible."
  `(line-number-current-line ((t (:inherit monos-face-strong))))
  `(line-number-major-tick ((t (:inherit monos-face-default))))
  `(line-number-minor-tick ((t (:inherit monos-face-faded))))
+
  ;; M-x customize-group RET display-fill-column-indicator
  `(fill-column-indicator ((t (:inherit monos-face-faded))))
+
  ;; M-x customize-group RET mode-line-faces
  `(display-time-mail-face ((t nil)))
  `(mode-line ((t (:box
@@ -246,14 +257,67 @@ background color that is barely perceptible."
                             :style nil)
                            :foreground ,monos-color--background
                            :background ,monos-color--faded))))
+
  ;; M-x customize-group RET tooltip
  `(tooltip ((t (:height
                 0.85
                 :inherit monos-face-subtle))))
+
  ;; M-x customize-group RET window-divider
  `(window-divider ((t (:foreground ,monos-color--subtle))))
  `(window-divider-first-pixel ((t (:foreground ,monos-color--subtle))))
  `(window-divider-last-pixel ((t (:foreground ,monos-color--subtle))))
+
+ ;; M-x customize-group RET custom-faces
+ `(custom-button ((t (:box
+                      (:line-width
+                       1
+                       :color ,monos-color--faded
+                       :style nil)
+                      :foreground ,monos-color--faded
+                      :background ,monos-color--background))))
+ `(custom-button-mouse ((t (:box
+                            (:line-width
+                             1
+                             :color ,monos-color--faded
+                             :style nil)
+                            :foreground ,monos-color--faded
+                            :background ,monos-color--subtle))))
+ `(custom-button-pressed ((t (:box
+                              (:line-width
+                               1
+                               :color ,monos-color--salient
+                               :style nil)
+                              :foreground ,monos-color--background
+                              :background ,monos-color--salient
+                              :inherit monos-face-salient))))
+ `(custom-button-pressed-unraised ((t (:underline
+                                       t
+                                       :inherit monos-face-faded))))
+ `(custom-button-unraised ((t (:underline
+                               t
+                               :inherit monos-face-faded))))
+ `(custom-comment ((t (:inherit monos-face-faded))))
+ `(custom-comment-tag ((t (:inherit monos-face-faded))))
+ `(custom-documentation ((t nil)))
+ `(custom-face-tag ((t (:inherit monos-face-strong))))
+ `(custom-group-subtitle ((t (:inherit monos-face-strong))))
+ `(custom-group-tag ((t (:inherit monos-face-strong))))
+ `(custom-group-tag-1 ((t (:inherit monos-face-strong))))
+ `(custom-link ((t (:inherit monos-face-salient))))
+ `(custom-state ((t (:inherit monos-face-salient))))
+ `(custom-variable-button ((t (::underline
+                               t
+                               inherit monos-face-strong))))
+ `(custom-variable-obsolete ((t (:inherit monos-face-faded))))
+ `(custom-variable-tag ((t (:inherit monos-face-strong))))
+ `(custom-visibility ((t (:inherit monos-face-salient))))
+ `(eieio-custom-slot-tag-face ((t (:inherit monos-face-faded))))
+
+ ;; M-x customize-group RET bookmark
+ `(bookmark-face ((t (:inherit monos-face-subtle))))
+ `(bookmark-menu-bookmark ((t (:inherit monos-face-salient))))
+ `(bookmark-menu-heading ((t (:inherit monos-face-strong))))
  )
 
 ;; M-x list-faces-display
