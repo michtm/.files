@@ -20,5 +20,12 @@
 (require 'packages)
 (pkg/use-package company)
 (pkg/use-package magit)
+(pkg/use-package
+ markdown-mode
+ :ensure t
+ :mode ("README\\.md\\'" . gfm-mode)
+ :init (setq markdown-command "multimarkdown")
+ :bind (:map markdown-mode-map
+             ("C-c C-e" . markdown-do)))
 
 ;;; init.el ends here
