@@ -4,6 +4,7 @@
 
 ;; Lire https://github.com/rougier/nano-emacs
 ;; Lire https://github.com/rougier/nano-theme
+;; Lire https://github.com/Lambda-Emacs/lambda-themes
 ;; Lire https://arxiv.org/pdf/2008.06030
 
 ;; Certaines couleurs sont données par AI
@@ -62,12 +63,12 @@
   :group 'monos
   :type 'color)
 
-(defcustom monos-color--faded "#b5b1a4"
+(defcustom monos-color--faded "#656155" ;;"#b5b1a4"
   ""
   :group 'monos
   :type 'color)
 
-(defcustom monos-color--subtle "#e8e6dd"
+(defcustom monos-color--subtle "#b4af9a" ;;"#e8e6dd"
   ""
   :type 'color)
 
@@ -200,6 +201,61 @@ background color that is barely perceptible."
  `(vertical-border ((t (:foreground ,monos-color--subtle))))
  `(warning ((t (:inherit monos-face-popout))))
 
+ ;; M-x customize-group RET font-lock-faces
+ `(elisp-shorthand-font-lock-face ((t (:inherit monos-face-salient))))
+ `(font-lock-builtin-face ((t (:inherit monos-face-salient))))
+ `(font-lock-comment-delimiter-face ((t (:inherit monos-face-faded))))
+ `(font-lock-comment-face ((t (:inherit monos-face-faded))))
+ `(font-lock-constant-face ((t (:inherit monos-face-salient))))
+ `(font-lock-doc-face ((t (:inherit monos-face-faded))))
+ `(font-lock-doc-markup-face ((t (:inherit monos-face-salient))))
+ `(font-lock-function-name-face ((t (:inherit monos-face-strong))))
+ `(font-lock-keyword-face ((t (:inherit monos-face-salient))))
+ `(font-lock-negation-char-face ((t nil)))
+ `(font-lock-preprocessor-face ((t (:inherit monos-face-salient))))
+ `(font-lock-regexp-grouping-backslash ((t (:inherit monos-face-strong))))
+ `(font-lock-regexp-grouping-construct ((t (:inherit monos-face-strong))))
+ `(font-lock-string-face ((t (:inherit monos-face-popout))))
+ `(font-lock-type-face ((t (:inherit monos-face-salient))))
+ `(font-lock-variable-name-face ((t (:inherit monos-face-strong))))
+ `(font-lock-warning-face ((t (:inherit monos-face-popout))))
+
+ ;; M-x customize-group RET whitespace
+ `(whitespace-big-indent ((t (:weight
+                              ,'extra-light
+                              :inherit monos-face-faded))))
+ `(whitespace-empty ((t (:weight
+                         ,'extra-light
+                         :inherit monos-face-faded))))
+ `(whitespace-hspace ((t (:weight
+                          ,'extra-light
+                          :inherit monos-face-faded))))
+ `(whitespace-indentation ((t (:weight
+                               ,'extra-light
+                               :inherit monos-face-faded))))
+ `(whitespace-line ((t nil)))
+ `(whitespace-missing-newline-at-eof ((t (:weight
+                                          ,'extra-light
+                                          :inherit monos-face-faded))))
+ `(whitespace-newline ((t (:weight
+                           ,'extra-light
+                           :inherit monos-face-faded))))
+ `(whitespace-space ((t (:weight
+                         ,'extra-light
+                         :inherit monos-face-faded))))
+ `(whitespace-space-after-tab ((t (:weight
+                                   ,'extra-light
+                                   :inherit monos-face-faded))))
+ `(whitespace-space-before-tab ((t (:weight
+                                    ,'extra-light
+                                    :inherit monos-face-faded))))
+ `(whitespace-tab ((t (:weight
+                       ,'extra-light
+                       :inherit monos-face-faded))))
+ `(whitespace-trailing ((t (:weight
+                            ,'extra-light
+                            :inherit monos-face-faded))))
+
  ;; M-x customize-group RET frames
  `(border ((t nil)))
  `(child-frame-border ((t nil)))
@@ -253,10 +309,10 @@ background color that is barely perceptible."
  `(mode-line-inactive ((t (:box
                            (:line-width
                             3
-                            :color ,monos-color--faded
+                            :color ,monos-color--subtle
                             :style nil)
-                           :foreground ,monos-color--background
-                           :background ,monos-color--faded))))
+                           :foreground ,monos-color--foreground
+                           :background ,monos-color--subtle))))
 
  ;; M-x customize-group RET tooltip
  `(tooltip ((t (:height
@@ -319,221 +375,6 @@ background color that is barely perceptible."
  `(bookmark-menu-bookmark ((t (:inherit monos-face-salient))))
  `(bookmark-menu-heading ((t (:inherit monos-face-strong))))
  )
-
-;; M-x list-faces-display
-;; Info-quoted
-;; bold
-;; bold-italic
-;; border
-;; browse-url-button
-;; buffer-menu-buffer
-;; button
-;; child-frame-border
-;; completions-annotations
-;; completions-common-part
-;; completions-first-difference
-;; completions-group-separator
-;; completions-group-title
-;; cursor
-;; custom-button
-;; custom-button-mouse
-;; custom-button-pressed
-;; custom-button-pressed-unraised
-;; custom-button-unraised
-;; custom-changed
-;; custom-comment
-;; custom-comment-tag
-;; custom-documentation
-;; custom-face-tag
-;; custom-group-subtitle
-;; custom-group-tag
-;; custom-group-tag-1
-;; custom-invalid
-;; custom-link
-;; custom-modified
-;; custom-rogue
-;; custom-saved
-;; custom-set
-;; custom-state
-;; custom-themed
-;; custom-variable-button
-;; custom-variable-obsolete
-;; custom-variable-tag
-;; custom-visibility
-;; default
-;; diff-added
-;; diff-changed
-;; diff-changed-unspecified
-;; diff-context
-;; diff-error
-;; diff-file-header
-;; diff-function
-;; diff-header
-;; diff-hunk-header
-;; diff-index
-;; diff-indicator-added
-;; diff-indicator-changed
-;; diff-indicator-removed
-;; diff-nonexistent
-;; diff-refine-added
-;; diff-refine-changed
-;; diff-refine-removed
-;; diff-removed
-;; eldoc-highlight-function-argument
-;; elisp-shorthand-font-lock-face
-;; error
-;; escape-glyph
-;; file-name-shadow
-;; fill-column-indicator
-;; fixed-pitch
-;; fixed-pitch-serif
-;; font-lock-builtin-face
-;; font-lock-comment-delimiter-face
-;; font-lock-comment-face
-;; font-lock-constant-face
-;; font-lock-doc-face
-;; font-lock-doc-markup-face
-;; font-lock-function-name-face
-;; font-lock-keyword-face
-;; font-lock-negation-char-face
-;; font-lock-preprocessor-face
-;; font-lock-regexp-grouping-backslash
-;; font-lock-regexp-grouping-construct
-;; font-lock-string-face
-;; font-lock-type-face
-;; font-lock-variable-name-face
-;; font-lock-warning-face
-;; fringe
-;; glyphless-char
-;; header-line
-;; header-line-highlight
-;; help-argument-name
-;; help-for-help-header
-;; help-key-binding
-;; highlight
-;; homoglyph
-;; info-header-node
-;; info-header-xref
-;; info-index-match
-;; info-menu-header
-;; info-menu-star
-;; info-node
-;; info-title-1
-;; info-title-2
-;; info-title-3
-;; info-title-4
-;; info-xref
-;; info-xref-visited
-;; internal-border
-;; isearch
-;; isearch-fail
-;; isearch-group-1
-;; isearch-group-2
-;; italic
-;; lazy-highlight
-;; line-number
-;; line-number-current-line
-;; line-number-major-tick
-;; line-number-minor-tick
-;; link
-;; link-visited
-;; match
-;; menu
-;; minibuffer-prompt
-;; mode-line
-;; mode-line-buffer-id
-;; mode-line-emphasis
-;; mode-line-highlight
-;; mode-line-inactive
-;; mouse
-;; mouse-drag-and-drop-region
-;; next-error
-;; next-error-message
-;; nobreak-hyphen
-;; nobreak-space
-;; package-description
-;; package-help-section-name
-;; package-name
-;; package-status-avail-obso
-;; package-status-available
-;; package-status-built-in
-;; package-status-dependency
-;; package-status-disabled
-;; package-status-external
-;; package-status-held
-;; package-status-incompat
-;; package-status-installed
-;; package-status-new
-;; package-status-unsigned
-;; query-replace
-;; read-multiple-choice-face
-;; rectangle-preview
-;; region
-;; scroll-bar
-;; secondary-selection
-;; separator-line
-;; shadow
-;; shortdoc-heading
-;; shortdoc-section
-;; show-paren-match
-;; show-paren-match-expression
-;; show-paren-mismatch
-;; speedbar-button-face
-;; speedbar-directory-face
-;; speedbar-file-face
-;; speedbar-highlight-face
-;; speedbar-selected-face
-;; speedbar-separator-face
-;; speedbar-tag-face
-;; success
-;; tab-bar
-;; tab-bar-tab
-;; tab-bar-tab-group-current
-;; tab-bar-tab-group-inactive
-;; tab-bar-tab-inactive
-;; tab-bar-tab-ungrouped
-;; tab-line
-;; tabulated-list-fake-header
-;; tool-bar
-;; tooltip
-;; trailing-whitespace
-;; tty-menu-disabled-face
-;; tty-menu-enabled-face
-;; tty-menu-selected-face
-;; underline
-;; variable-pitch
-;; vc-conflict-state
-;; vc-edited-state
-;; vc-locally-added-state
-;; vc-locked-state
-;; vc-missing-state
-;; vc-needs-update-state
-;; vc-removed-state
-;; vc-state-base
-;; vc-up-to-date-state
-;; vertical-border
-;; warning
-;; whitespace-big-indent
-;; whitespace-empty
-;; whitespace-hspace
-;; whitespace-indentation
-;; whitespace-line
-;; whitespace-missing-newline-at-eof
-;; whitespace-newline
-;; whitespace-space
-;; whitespace-space-after-tab
-;; whitespace-space-before-tab
-;; whitespace-tab
-;; whitespace-trailing
-;; widget-button
-;; widget-button-pressed
-;; widget-documentation
-;; widget-field
-;; widget-inactive
-;; widget-single-line-field
-;; window-divider
-;; window-divider-first-pixel
-;; window-divider-last-pixel
 
 ;;;###autoload
 (when load-file-name
