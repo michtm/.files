@@ -374,6 +374,11 @@ background color that is barely perceptible."
  `(bookmark-face ((t (:inherit monos-face-subtle))))
  `(bookmark-menu-bookmark ((t (:inherit monos-face-salient))))
  `(bookmark-menu-heading ((t (:inherit monos-face-strong))))
+
+ ;; M-x customize-group RET paren-showing-faces
+ `(show-paren-match ((t (:inherit monos-face-popout))))
+ `(show-paren-match-expression ((t (:inherit monos-face-popout))))
+ `(show-paren-mismatch ((t (:inherit monos-face-critical))))
  )
 
 ;;;###autoload
