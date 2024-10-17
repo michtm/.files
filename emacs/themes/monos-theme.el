@@ -63,7 +63,7 @@
   :group 'monos
   :type 'color)
 
-(defcustom monos-color--faded "#656155" ;;"#b5b1a4"
+(defcustom monos-color--faded "7a766f"
   ""
   :group 'monos
   :type 'color)
