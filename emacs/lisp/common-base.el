@@ -14,7 +14,8 @@
 
 (defun cb-init/setup ()
   (setq make-backup-files nil
-        package-install-upgrade-built-in t))
+        package-install-upgrade-built-in t
+        visible-bell t))
 
 ;; Définition de crochets personnalisés
 ;; - Init hook
