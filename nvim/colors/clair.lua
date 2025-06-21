@@ -1,0 +1,1 @@
+require("colorscheme.clairobscur").load({ background = "light" })
