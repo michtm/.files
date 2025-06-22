@@ -190,7 +190,7 @@ function groups.apply(opts)
     DiagnosticSignInfo = { link = 'DiagnosticInfo' },
     DiagnosticSignHint = { link = 'DiagnosticHint' },
     DiagnosticSignOk = { link = 'DiagnosticOk' },
-    DiagnosticDeprecated,
+    DiagnosticDeprecated = { fg = palette.faded, strikethrough = true },
     DiagnosticUnnecessary = { link = 'Comment' },
   }
   --https://neovim.io/doc/user/treesitter.html#treesitter-highlight-groups
@@ -261,7 +261,7 @@ function groups.apply(opts)
     ['@markup'] = { link = 'Special' },
     ['@markup.strong'] = { link = 'Strong' },
     ['@markup.italic'] = { link = 'Faded' },
-    ['@markup.strikethrough'] = { link = 'Faded' },
+    ['@markup.strikethrough'] = { fg = palette.faded, strikethrough = true },
     ['@markup.underline'] = { link = 'Underlined' },
     ['@markup.heading'] = { link = 'Strong' },
     ['@markup.heading.1'] = { link = 'Strong' },
@@ -289,6 +289,9 @@ function groups.apply(opts)
     ['@tag.delimiter'] = { link = '@tag' },
   }
   -- TODO https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
+  local lsp_semantic_highlights = {
+
+  }
   -- TODO https://neovim.io/doc/user/lsp.html#lsp-highlight
   local groups_tbl = {
     Normal = { bg = palette.bg, fg = palette.fg },
