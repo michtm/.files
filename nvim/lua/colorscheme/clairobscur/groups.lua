@@ -150,7 +150,7 @@ function groups.apply(opts)
     Delimiter = { link = 'Special' },
     SpecialComment = { link = 'Special' },
     Debug = { link = 'Special' },
-    Underlined = { link = 'Salient' },
+    Underlined = { fg = palette.salient, underline = true },
     Ignore = { fg = bg },
     Error = { link = 'Popout' },
     Todo = { link = 'Salient' },
@@ -158,9 +158,43 @@ function groups.apply(opts)
     Changed = { link = 'Popout' },
     Removed = { link = 'Faded' },
   }
-  -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-highlights
+  -- https://neovim.io/doc/user/diagnostic.html#diagnostic-highlights
+  local diagnostic_highlights = {
+    DiagnosticError = { link = 'Critical' },
+    DiagnosticWarn = { link = 'Popout'},
+    DiagnosticInfo = { link = 'Normal' },
+    DiagnosticHint = { link = 'Faded' },
+    DiagnosticOk = { link = 'Salient' },
+    DiagnosticVirtualTextError = { link = 'DiagnosticError' },
+    DiagnosticVirtualTextWarn = { link = 'DiagnosticWarn' },
+    DiagnosticVirtualTextInfo = { link = 'DiagnosticInfo' },
+    DiagnosticVirtualTextHint = { link = 'DiagnosticHint' },
+    DiagnosticVirtualTextOk = { link = 'DiagnosticOk' },
+    DiagnosticVirtualLinesError = { link = 'DiagnosticError' },
+    DiagnosticVirtualLinesWarn = { link = 'DiagnosticWarn' },
+    DiagnosticVirtualLinesInfo = { link = 'DiagnosticInfo' },
+    DiagnosticVirtualLinesHint = { link = 'DiagnosticHint' },
+    DiagnosticVirtualLinesOk = { link = 'DiagnosticOk' },
+    DiagnosticUnderlineError = { bg = palette.critical, fg = palette.bg, underline = true },
+    DiagnosticUnderlineWarn = { fg = palette.popout, underline = true },
+    DiagnosticUnderlineInfo = { bg = palette.bg, fg = palette.fg, underline = true },
+    DiagnosticUnderlineHint = { fg = palette.faded, underline = true },
+    DiagnosticUnderlineOk = { fg = palette.salient, underline = true },
+    DiagnosticFloatingError = { link = 'DiagnosticError' },
+    DiagnosticFloatingWarn = { link = 'DiagnosticWarn' },
+    DiagnosticFloatingInfo = { link = 'DiagnosticInfo' },
+    DiagnosticFloatingHint = { link = 'DiagnosticHint' },
+    DiagnosticFloatingOk = { link = 'DiagnosticOk' },
+    DiagnosticSignError = { link = 'DiagnosticError' },
+    DiagnosticSignWarn = { link = 'DiagnosticWarn' },
+    DiagnosticSignInfo = { link = 'DiagnosticInfo' },
+    DiagnosticSignHint = { link = 'DiagnosticHint' },
+    DiagnosticSignOk = { link = 'DiagnosticOk' },
+    DiagnosticDeprecated,
+    DiagnosticUnnecessary = { link = 'Comment' },
+  }
+  --https://neovim.io/doc/user/treesitter.html#treesitter-highlight-groups
   local treesitter_highlight_groups = {
-    --https://neovim.io/doc/user/treesitter.html#treesitter-highlight-groups
     ['@variable'] = { link = 'Identifier' },
     ['@variable.builtin'] = { link = 'Special' },
     ['@variable.parameter'] = { link = 'Identifier' },
@@ -267,6 +301,7 @@ function groups.apply(opts)
   }
   merge_tbl(highlight_groups, groups_tbl)
   merge_tbl(syntax_groups, groups_tbl)
+  merge_tbl(diagnostic_highlights, groups_tbl)
   merge_tbl(treesitter_highlight_groups, groups_tbl)
   for name, map in pairs(groups_tbl) do
     set_hl(name, map)
