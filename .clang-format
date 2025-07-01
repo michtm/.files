@@ -1,0 +1,4 @@
+BasedOnStyle: GNU
+IndentWidth: 2
+UseTab: Never
+ColumnLimit: 80
