@@ -289,10 +289,9 @@ function groups.apply(opts)
     ['@tag.delimiter'] = { link = '@tag' },
   }
   -- TODO https://neovim.io/doc/user/lsp.html#lsp-semantic-highlight
-  local lsp_semantic_highlights = {
-
-  }
+  local lsp_semantic_highlights = {}
   -- TODO https://neovim.io/doc/user/lsp.html#lsp-highlight
+  local lsp_highlight_groups = {}
   local groups_tbl = {
     Normal = { bg = palette.bg, fg = palette.fg },
     Critical = { bg = palette.critical, fg = palette.bg },
