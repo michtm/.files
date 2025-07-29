@@ -6,7 +6,7 @@ local colors = {}
 local function clair()
   return {
     -- Couleurs de base
-    bg = '#dad4bb',
+    bg = '#cdc8b0',
     fg = '#4e4b42',
     critical = '#780606', -- Rouge sang
     popout = '#cd664d',   -- Rouge-orange
@@ -23,7 +23,7 @@ local function obscur()
    return {
     -- Couleurs de base
     bg = '#4e4b42',
-    fg = '#dad4bb',
+    fg = '#cdc8b0',
     critical = '#780606', -- Rouge sang
     popout = '#cd664d',   -- Rouge-orange
     strong = '#000000',   -- Noir
