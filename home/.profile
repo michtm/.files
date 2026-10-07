@@ -1,3 +1,38 @@
-# Point d'entrée des login shells.
-#
-# La configuration réelle sera ajoutée lors d'une étape ultérieure.
+# ~/.profile
+
+# Ajoute un répertoire en tête de PATH uniquement s'il existe
+# et n'est pas déjà présent.
+path_prepend()
+{
+    [ -d "$1" ] || return 0
+
+    case ":${PATH:-}:" in
+        *":$1:"*) ;;
+        *) PATH="$1${PATH:+:$PATH}" ;;
+    esac
+}
+
+# Répertoires utilisateur.
+path_prepend "$HOME/bin"
+path_prepend "$HOME/.local/bin"
+
+# pnpm.
+PNPM_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}/pnpm"
+export PNPM_HOME
+
+path_prepend "$PNPM_HOME/bin"
+
+export PATH
+
+unset -f path_prepend
+
+# Charge la configuration interactive Bash pour un login shell Bash.
+if [ -n "${BASH_VERSION:-}" ]; then
+    case $- in
+        *i*)
+            if [ -r "$HOME/.bashrc" ]; then
+                . "$HOME/.bashrc"
+            fi
+            ;;
+    esac
+fi
