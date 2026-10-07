@@ -22,6 +22,14 @@ export PNPM_HOME
 
 path_prepend "$PNPM_HOME/bin"
 
+# mise.
+mise_data_dir="${MISE_DATA_DIR:-${XDG_DATA_HOME:-"$HOME/.local/share"}/mise}"
+mise_shims_dir="${MISE_SHIMS_DIR:-"$mise_data_dir/shims"}"
+
+path_prepend "$mise_shims_dir"
+
+unset mise_data_dir mise_shims_dir
+
 export PATH
 
 unset -f path_prepend
