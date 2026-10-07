@@ -1,33 +1,67 @@
-# Prompt Bash.
+# Prompt Bash — interface d'inspection.
 
-if [[ -z ${debian_chroot:-} && -r /etc/debian_chroot ]]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+# Évite la réévaluation des valeurs dynamiques du prompt.
+shopt -u promptvars
 
-case "$TERM" in
-    xterm-color|*-256color)
-        color_prompt=yes
-        ;;
-esac
+# Réduit les chemins très longs.
+PROMPT_DIRTRIM=3
 
-if [[ -n ${force_color_prompt:-} ]]; then
-    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
-        color_prompt=yes
-    else
-        color_prompt=
+_dotfiles_prompt_update()
+{
+    local last_status=$?
+
+    local muted='\[\e[38;2;168;161;150m\]'
+    local text='\[\e[38;2;216;211;199m\]'
+    local accent='\[\e[38;2;187;169;138m\]'
+    local error='\[\e[38;2;201;135;125m\]'
+    local reset='\[\e[0m\]'
+
+    local line="${muted}DIR${reset} ${text}\w${reset}"
+    local git_state branch dirty
+
+    if git_state=$(GIT_OPTIONAL_LOCKS=0 git status \
+        --porcelain=v1 --branch \
+        --untracked-files=normal 2>/dev/null); then
+
+        branch=${git_state%%$'\n'*}
+        branch=${branch#'## '}
+
+        case $branch in
+            'HEAD (no branch)')
+                branch="@$(git rev-parse --short HEAD)"
+                ;;
+            'No commits yet on '*)
+                branch=${branch#'No commits yet on '}
+                ;;
+            'Initial commit on '*)
+                branch=${branch#'Initial commit on '}
+                ;;
+        esac
+
+        branch=${branch%%...*}
+
+        dirty=
+        [[ $git_state == *$'\n'* ]] && dirty='*'
+
+        line+="  ${muted}GIT${reset} ${accent}${branch}${dirty}${reset}"
     fi
+
+    if (( last_status != 0 )); then
+        line+="  ${muted}EXIT${reset} ${error}${last_status}${reset}"
+    fi
+
+    if [[ -n ${SSH_CONNECTION:-} ]]; then
+        line+="  ${muted}SSH${reset}"
+    fi
+
+    if (( EUID == 0 )); then
+        line+="  ${error}ROOT${reset}"
+    fi
+
+    PS1="${line}"$'\n'"${accent}❯${reset} "
+}
+
+# Préserve une éventuelle commande de prompt existante.
+if [[ ${PROMPT_COMMAND:-} != *_dotfiles_prompt_update* ]]; then
+    PROMPT_COMMAND="_dotfiles_prompt_update${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 fi
-
-if [[ ${color_prompt:-} == yes ]]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-
-unset color_prompt force_color_prompt
-
-case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-        ;;
-esac
