@@ -1,3 +1,7 @@
-# Orchestrateur de la configuration interactive Bash.
-#
-# Les modules seront chargés explicitement depuis ce fichier.
+# Configuration interactive Bash.
+
+source "$BASH_CONFIG_HOME/options.bash"
+source "$BASH_CONFIG_HOME/history.bash"
+source "$BASH_CONFIG_HOME/prompt.bash"
+source "$BASH_CONFIG_HOME/aliases.bash"
+source "$BASH_CONFIG_HOME/completion.bash"
