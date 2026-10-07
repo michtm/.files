@@ -1,0 +1,10 @@
+[Unit]
+Description=OpenSSH authentication agent
+Documentation=man:ssh-agent(1)
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh-agent -D -a %t/ssh-agent.socket
+
+[Install]
+WantedBy=default.target

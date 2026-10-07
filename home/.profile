@@ -34,6 +34,12 @@ export PATH
 
 unset -f path_prepend
 
+# OpenSSH authentication agent.
+if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
+    SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    export SSH_AUTH_SOCK
+fi
+
 # Charge la configuration interactive Bash pour un login shell Bash.
 if [ -n "${BASH_VERSION:-}" ]; then
     case $- in
