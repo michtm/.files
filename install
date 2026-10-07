@@ -1,6 +1,118 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 
-printf '%s\n' 'Installation non implémentée.'
-printf '%s\n' 'Aucune modification de $HOME n’a été effectuée.'
+REPO_ROOT="$(
+    cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+    pwd -P
+)"
+
+STATE_HOME="${XDG_STATE_HOME:-"$HOME/.local/state"}"
+BACKUP_ROOT="$STATE_HOME/dotfiles/backups/$(date '+%Y%m%d-%H%M%S')"
+
+backup_created=false
+
+backup_existing()
+{
+    local destination=$1
+    local relative
+    local backup
+
+    relative="${destination#"$HOME"/}"
+    backup="$BACKUP_ROOT/$relative"
+
+    mkdir -p -- "$(dirname -- "$backup")"
+    mv -- "$destination" "$backup"
+
+    backup_created=true
+
+    printf 'backup  %s -> %s\n' "$destination" "$backup"
+}
+
+is_expected_link()
+{
+    local source=$1
+    local destination=$2
+
+    [[ -L "$destination" ]] || return 1
+
+    [[ "$(readlink -f -- "$destination" 2>/dev/null || true)" == \
+       "$(readlink -f -- "$source")" ]]
+}
+
+link_path()
+{
+    local source=$1
+    local destination=$2
+
+    if [[ ! -e "$source" && ! -L "$source" ]]; then
+        printf 'error   source inexistante : %s\n' "$source" >&2
+        exit 1
+    fi
+
+    mkdir -p -- "$(dirname -- "$destination")"
+
+    if is_expected_link "$source" "$destination"; then
+        printf 'ok      %s\n' "$destination"
+        return
+    fi
+
+    if [[ -e "$destination" || -L "$destination" ]]; then
+        backup_existing "$destination"
+    fi
+
+    ln -s -- "$source" "$destination"
+
+    printf 'link    %s -> %s\n' "$destination" "$source"
+}
+
+printf 'Déploiement depuis %s\n\n' "$REPO_ROOT"
+
+# Points d'entrée du shell.
+link_path \
+    "$REPO_ROOT/home/.profile" \
+    "$HOME/.profile"
+
+link_path \
+    "$REPO_ROOT/home/.bashrc" \
+    "$HOME/.bashrc"
+
+# Configuration Bash.
+link_path \
+    "$REPO_ROOT/config/bash" \
+    "$HOME/.config/bash"
+
+# mise.
+link_path \
+    "$REPO_ROOT/config/mise/config.toml" \
+    "$HOME/.config/mise/config.toml"
+
+# SSH.
+mkdir -p -- "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+link_path \
+    "$REPO_ROOT/home/.ssh/config" \
+    "$HOME/.ssh/config"
+
+# Services utilisateur systemd.
+link_path \
+    "$REPO_ROOT/config/systemd/user/ssh-agent.service" \
+    "$HOME/.config/systemd/user/ssh-agent.service"
+
+printf '\n'
+
+if systemctl --user show-environment >/dev/null 2>&1; then
+    systemctl --user daemon-reload
+    systemctl --user enable --now ssh-agent.service
+
+    printf 'service ssh-agent activé\n'
+else
+    printf 'warning systemd utilisateur indisponible ; ssh-agent non activé\n' >&2
+fi
+
+if [[ $backup_created == true ]]; then
+    printf '\nSauvegardes : %s\n' "$BACKUP_ROOT"
+fi
+
+printf '\nDéploiement terminé.\n'
