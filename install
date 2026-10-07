@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+printf '%s\n' 'Installation non implémentée.'
+printf '%s\n' 'Aucune modification de $HOME n’a été effectuée.'

@@ -1,0 +1,3 @@
+# Orchestrateur de la configuration interactive Bash.
+#
+# Les modules seront chargés explicitement depuis ce fichier.

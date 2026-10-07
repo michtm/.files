@@ -1,0 +1,1 @@
+# Configuration du prompt Bash.

@@ -1,0 +1,1 @@
+# Options du shell Bash.
