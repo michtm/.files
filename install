@@ -82,6 +82,11 @@ link_path \
     "$REPO_ROOT/config/bash" \
     "$HOME/.config/bash"
 
+# Emacs.
+link_path \
+    "$REPO_ROOT/config/emacs" \
+    "$HOME/.config/emacs"
+
 # mise.
 link_path \
     "$REPO_ROOT/config/mise/config.toml" \
