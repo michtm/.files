@@ -89,3 +89,71 @@ plage   : 16–21 ms
 Le coût du démarrage interactif a ainsi diminué d'environ **98,9 %**, soit un facteur d'environ **94×**.
 
 Ces valeurs constituent la baseline de performance de la configuration. Toute évolution affectant le chemin de démarrage du shell doit être comparée à cette référence.
+
+
+## Terminal interactif
+
+### Environnement
+
+- Windows Terminal avec WSL 2 / Ubuntu.
+- Shell : Bash.
+- Profil : `wsl.exe -d Ubuntu`.
+- Raccourci Windows : `wt.exe -p "Ubuntu"`.
+
+### Identité visuelle
+
+Inspiration : interfaces de NieR:Automata.
+
+- Fond : `#252420` (charbon chaud).
+- Texte : `#D8D3C7` (ivoire adouci).
+- Texte secondaire : `#A8A196` (gris chaud).
+- Accent : `#BBA98A` (sable désaturé).
+- Erreur : `#C9877D` (rouge terreux).
+- Police : IBM Plex Mono.
+- Prompt Bash : deux lignes, informations contextuelles.
+
+### Outils
+
+| Outil | Utilisation |
+|---|---|
+| fzf | Recherche interactive |
+| ripgrep | Recherche dans les fichiers |
+| bat | Lecture de fichiers avec coloration syntaxique |
+
+Raccourcis fzf :
+
+- Ctrl+R : historique.
+- Ctrl+T : fichiers.
+- Alt+C : répertoires.
+
+Installation sous Ubuntu :
+
+```bash
+sudo apt install fzf ripgrep bat
+```
+
+Sur Ubuntu 24.04, l'exécutable bat est
+généralement nommé `batcat`.
+
+### Choix différés
+
+- zoxide : non retenu.
+- delta : non retenu à ce stade.
+- Thème de coloration syntaxique : à définir
+  lors de la configuration de l'éditeur de texte.
+- Moteur de fuzzy search personnel : piste future.
+
+### Performance
+
+Baseline historique du démarrage Bash :
+environ 9 ms.
+
+Dernière mesure ponctuelle avec fzf :
+environ 10 ms.
+
+Recalcul du prompt V1 :
+39 ms pour 20 appels, soit 1,95 ms par appel
+sur le dépôt testé.
+
+Ces mesures sont indicatives et doivent être
+réévaluées après les évolutions significatives.
