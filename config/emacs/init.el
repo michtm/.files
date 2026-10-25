@@ -1,5 +1,17 @@
 ;;; init.el --- Configuration principale -*- lexical-binding: t; -*-
 
+;; Profilage temporaire du GC pendant l'initialisation.
+(let ((start-count gcs-done)
+      (start-time gc-elapsed))
+  (add-hook
+   'after-init-hook
+   (lambda ()
+     (message
+      "INIT %s | GC %d collectes | %.3f ms"
+      (emacs-init-time)
+      (- gcs-done start-count)
+      (* 1000 (- gc-elapsed start-time))))))
+
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
 

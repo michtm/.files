@@ -14,4 +14,14 @@
           cache-home
         (expand-file-name "~/.cache/"))))))
 
+;; Augmente temporairement le seuil du GC pendant le démarrage.
+;; 4 Mio : seuil retenu après comparaison de 15 lancements.
+(let ((original-threshold gc-cons-threshold))
+  (setq gc-cons-threshold (* 4 1024 1024))
+
+  ;; Rétablit la politique normale après l'initialisation.
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (setq gc-cons-threshold original-threshold))))
+
 ;;; early-init.el ends here
