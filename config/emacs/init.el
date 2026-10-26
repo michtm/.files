@@ -1,17 +1,5 @@
 ;;; init.el --- Configuration principale -*- lexical-binding: t; -*-
 
-;; Profilage temporaire du GC pendant l'initialisation.
-(let ((start-count gcs-done)
-      (start-time gc-elapsed))
-  (add-hook
-   'after-init-hook
-   (lambda ()
-     (message
-      "INIT %s | GC %d collectes | %.3f ms"
-      (emacs-init-time)
-      (- gcs-done start-count)
-      (* 1000 (- gc-elapsed start-time))))))
-
 (setq inhibit-startup-screen t
       initial-scratch-message nil)
 
@@ -28,4 +16,14 @@
 (when (file-readable-p custom-file)
   (load custom-file nil 'nomessage))
 
+;; Thème personnel.
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "themes" user-emacs-directory))
+
+(load-theme 'sombre t)
+
+(require 'init-layout)
+(require 'init-mode-line)
+
+(menu-bar-mode -1)
 ;;; init.el ends here
