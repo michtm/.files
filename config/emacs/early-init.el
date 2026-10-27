@@ -28,4 +28,12 @@
 (add-to-list 'default-frame-alist
              '(font . "IBM Plex Mono-12"))
 
+;; Géométrie des frames, définie avant leur création.
+(dolist (parameter
+         '((menu-bar-lines . 0)
+           (tool-bar-lines . 0)
+           (vertical-scroll-bars . nil)
+           (internal-border-width . 12)))
+  (setf (alist-get (car parameter) default-frame-alist)
+        (cdr parameter)))
 ;;; early-init.el ends here

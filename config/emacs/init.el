@@ -24,6 +24,4 @@
 
 (require 'init-layout)
 (require 'init-mode-line)
-
-(menu-bar-mode -1)
 ;;; init.el ends here

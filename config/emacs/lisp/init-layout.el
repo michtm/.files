@@ -1,32 +1,16 @@
 ;;; init-layout.el --- Géométrie et typographie -*- lexical-binding: t; -*-
 
-;; Une légère respiration verticale en interface graphique.
-;; Sans effet dans les terminaux texte.
+;; Respiration verticale, principalement en interface graphique.
 (setq-default line-spacing 0.10)
 
-;; Curseur stable et fenêtres secondaires discrètes.
+;; Curseur stable, discret dans les fenêtres inactives.
 (setq-default cursor-type 'box
               cursor-in-non-selected-windows nil)
 
 (blink-cursor-mode -1)
 
-;; Met en évidence la ligne courante dans les buffers de code.
+;; Ligne courante dans les buffers de programmation.
 (add-hook 'prog-mode-hook #'hl-line-mode)
-
-;; Éléments graphiques non indispensables.
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
-;; Bordure intérieure des nouvelles fenêtres graphiques.
-(add-to-list 'default-frame-alist
-             '(internal-border-width . 12))
-
-;; Bordure de la frame graphique actuelle.
-(when (display-graphic-p)
-  (set-frame-parameter nil 'internal-border-width 12))
 
 (provide 'init-layout)
 ;;; init-layout.el ends here
