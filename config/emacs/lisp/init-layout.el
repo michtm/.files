@@ -24,15 +24,9 @@
 (add-to-list 'default-frame-alist
              '(internal-border-width . 12))
 
-;; Ajustements de la fenêtre graphique actuelle.
+;; Bordure de la frame graphique actuelle.
 (when (display-graphic-p)
-  (set-frame-parameter nil 'internal-border-width 12)
-
-  ;; Utilise IBM Plex Mono uniquement si elle est disponible.
-  (when (member "IBM Plex Mono" (font-family-list))
-    (set-face-attribute 'default nil
-                        :family "IBM Plex Mono"
-                        :height 120)))
+  (set-frame-parameter nil 'internal-border-width 12))
 
 (provide 'init-layout)
 ;;; init-layout.el ends here

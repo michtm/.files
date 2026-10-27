@@ -24,4 +24,8 @@
             (lambda ()
               (setq gc-cons-threshold original-threshold))))
 
+;; Police des frames graphiques, définie avant leur création.
+(add-to-list 'default-frame-alist
+             '(font . "IBM Plex Mono-12"))
+
 ;;; early-init.el ends here
